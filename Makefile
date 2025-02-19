@@ -1,22 +1,14 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: kyung-ki <kyung-ki@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/01/23 19:08:41 by kyung-ki            #+#    #+#            #
-#    Updated: 2025/02/15 16:38:34 by kyung-ki           ###   ########.fr      #
-#                                                                              #
-# **************************************************************************** #
-
 NAME = cub3D
 
 SRC =	src/main.c \
-		src/parse.c \
-		src/wall_error.c \
+		src/parsing/parse.c \
+		src/parsing/wall_error.c \
+		src/parsing/map_stat.c \
+		src/parsing/utils.c \
+		src/free.c \
+		src/game/init_game.c \
 
-OBJS = $(SRC:.c=.o)
+OBJ = $(SRC:.c=.o)
 
 CC = gcc
 
@@ -25,15 +17,13 @@ CC = gcc
 
 all: $(NAME)
 
-$(NAME): ./mlx_linux/libmlx.a $(OBJ)
-	make -sC libft
-	$(CC) $(SRC) $(INC) $(OBJ) -Llibft -lft -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
-
-mlx_linux/libmlx.a:
+$(NAME): $(OBJ)
 	make -C mlx_linux
+	make -C libft
+	$(CC) $(OBJ) -Llibft -lft -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 
 clean:
-	rm -rfv $(OBJS)
+	rm -rfv $(OBJ)
 	make clean -C mlx_linux
 	make clean -C libft
 

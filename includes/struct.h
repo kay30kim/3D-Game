@@ -6,7 +6,7 @@
 /*   By: kyung-ki <kyung-ki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 11:47:11 by kyung-ki            #+#    #+#           */
-/*   Updated: 2025/02/13 20:53:34 by kyung-ki         ###   ########.fr       */
+/*   Updated: 2025/02/17 19:33:42 by kyung-ki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,14 @@ typedef struct  s_map
 
     // map data
     char    **map_tab;
+    char    **map_data;
     int     width_map;
     int     height_map;
 
     // player data
-    int     pos_x;
-    int     pos_y;
-    char    orientation;
+    int     p_pos_x;
+    int     p_pos_y;
+    char    p_direction;
 
     // color data
     int     rgb_floor[3];
@@ -44,6 +45,10 @@ typedef struct  s_map
     void    *south_wall;
     void    *east_wall;
     void    *west_wall;
+
+    // parsing variables
+    char    *line;
+    char    *map_line;
 
 }   t_map;
 
